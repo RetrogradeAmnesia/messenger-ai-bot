@@ -246,10 +246,7 @@ function verifyRequestSignature(req, res, buf) {
 app.listen(PORT);
 console.log('Listening on :' + PORT + '...' + 
 // ---------------------------------------- //
-validateSamples(samples).then(res => fbMessage(sender, res)+console.log(res))
-+
-fbMessage(sender, `- Sent.`)
-
+validateSamples(samples).then(res => console.log(res))
 // ---------------------------------------- //
 
 );
