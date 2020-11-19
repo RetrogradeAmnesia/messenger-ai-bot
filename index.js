@@ -50,8 +50,7 @@ const samples = data.map(([text]) => {
     text,
     entities: [
       {
-        entity: 'message_body',
-        value,
+        entity: 'message_body'
       },
     ],
     "traits": []
