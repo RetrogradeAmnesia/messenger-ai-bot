@@ -8,6 +8,7 @@ i have added console.log on line 48
 // Eventually lol
 
 */
+'use strict'
 const express = require('express')
 const bodyParser = require('body-parser')
 const request = require('request')
@@ -25,7 +26,7 @@ app.use(bodyParser.json())
 
 // index
 app.get('/', function (req, res) {
-	res.send('hello world i am a secret bot')
+	res.send('649447382')
 })
 
 // for facebook verification
