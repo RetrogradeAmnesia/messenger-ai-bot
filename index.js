@@ -24,7 +24,7 @@ const fetch = require('node-fetch');
 const {Wit, log} = require('node-wit');
 
 const fs = require('fs');
-const {validateSamples} = require('../shared');
+const {validateSamples} = require('./');
 
 
 const TAB = '	';
