@@ -33,31 +33,6 @@ const data = fs
   .split('\r')
   .map(row => row.split(TAB));
 
-  function validateSamples(samples) {
-    return fetch('https://api.wit.ai/utterances?v=20170307', {
-      method: 'POST',
-      headers: {
-        Authorization: `Bearer ${WIT_TOKEN}`,
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(samples),
-    })
-      .then(res => res.json())
-  }
-
-const samples = data.map(([text]) => {
-  return {
-    text,
-    entities: [
-      {
-        entity: 'message_body'
-      },
-    ],
-    "traits": []
-  };
-});
-
-
 
 const client = new Wit({
   accessToken: process.env.WIT_TOKEN,
@@ -244,9 +219,4 @@ function verifyRequestSignature(req, res, buf) {
 }
 
 app.listen(PORT);
-console.log('Listening on :' + PORT + '...' + 
-// ---------------------------------------- //
-validateSamples(samples).then(res => console.log(res))
-// ---------------------------------------- //
-
-);
+console.log('Listening on :' + PORT + '...');
