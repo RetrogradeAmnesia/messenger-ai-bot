@@ -14,7 +14,9 @@ const bodyParser = require('body-parser')
 const request = require('request')
 const app = express()
 
-let fbmessengertoken = 'EAAdLgfYQ3ocBAE5REd71UXkZAN66vPkzzDIXNjVaLTWDetuNbgIDqZAoR3k2gmNHqmhyKd3pny9VJtFGzaWwD90d78rjeZCHDVByXCX3uaRocBEzlfpq6ubg7xJuF4PTc7ZADQEldQFQJGY9BdHLdii1eH4KRtrCmChkofZA6PU1r2ZBVi6QZBe'
+let fbmtoken = `${process.env.FBMTOKEN}`
+let fbverifyval = `${process.env.FBVERIFYVAL}`
+
 
 app.set('port', (process.env.PORT || 5000))
 
@@ -26,12 +28,13 @@ app.use(bodyParser.json())
 
 // index
 app.get('/', function (req, res) {
-	res.send('649447382')
+	// res.send('649447382')
+	res.send(`${fbverifyval}`)
 })
 
 // for facebook verification
 app.get('/webhook/', function (req, res) {
-	if (req.query['hub.verify_token'] === `${fbmessengertoken}`) {
+	if (req.query['hub.verify_token'] === `${fbmtoken}`) {
 		res.send(req.query['hub.challenge'])
 	} else {
 		res.send('Error, wrong token')
