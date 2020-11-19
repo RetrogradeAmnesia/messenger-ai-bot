@@ -34,7 +34,7 @@ const data = fs
   .map(row => row.split(TAB));
 
   function validateSamples(samples) {
-    return fetch('https://api.wit.ai/utterances?v=20170307', {
+    return fetch('https://api.wit.ai/entities?v=20170307', {
       method: 'POST',
       headers: {
         Authorization: `Bearer ${WIT_TOKEN}`,
