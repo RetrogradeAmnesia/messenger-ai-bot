@@ -24,7 +24,7 @@ const fetch = require('node-fetch');
 const {Wit, log} = require('node-wit');
 
 const fs = require('fs');
-const {validateSamples} = require('./');
+
 
 
 const TAB = '	';
@@ -32,6 +32,18 @@ const data = fs
   .readFileSync('data.tsv', 'utf-8')
   .split('\r')
   .map(row => row.split(TAB));
+
+  function validateSamples(samples) {
+    return fetch('https://api.wit.ai/samples?v=20170307', {
+      method: 'POST',
+      headers: {
+        Authorization: `Bearer ${WIT_TOKEN}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(samples),
+    })
+      .then(res => res.json())
+  }
 
 const samples = data.map(([text, value]) => {
   return {
