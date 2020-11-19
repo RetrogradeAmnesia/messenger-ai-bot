@@ -45,7 +45,7 @@ const data = fs
       .then(res => res.json())
   }
 
-const samples = data.map(([text, value]) => {
+const samples = data.map(([text]) => {
   return {
     text,
     entities: [
