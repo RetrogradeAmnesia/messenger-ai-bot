@@ -7,13 +7,13 @@ i have added console.log on line 48
 
 // Eventually lol
 
- */
-'use strict'
-
+*/
 const express = require('express')
 const bodyParser = require('body-parser')
 const request = require('request')
 const app = express()
+
+let fbmessengertoken = 'EAAdLgfYQ3ocBAE5REd71UXkZAN66vPkzzDIXNjVaLTWDetuNbgIDqZAoR3k2gmNHqmhyKd3pny9VJtFGzaWwD90d78rjeZCHDVByXCX3uaRocBEzlfpq6ubg7xJuF4PTc7ZADQEldQFQJGY9BdHLdii1eH4KRtrCmChkofZA6PU1r2ZBVi6QZBe'
 
 app.set('port', (process.env.PORT || 5000))
 
@@ -30,7 +30,7 @@ app.get('/', function (req, res) {
 
 // for facebook verification
 app.get('/webhook/', function (req, res) {
-	if (req.query['hub.verify_token'] === 'my_voice_is_my_password_verify_me') {
+	if (req.query['hub.verify_token'] === `${fbmessengertoken}`) {
 		res.send(req.query['hub.challenge'])
 	} else {
 		res.send('Error, wrong token')
