@@ -22,16 +22,12 @@ const crypto = require('crypto');
 const express = require('express');
 const fetch = require('node-fetch');
 
-let Wit = null;
-let log = null;
-try {
-  // if running from repo
-  Wit = require('../').Wit;
-  log = require('../').log;
-} catch (e) {
-  Wit = require('node-wit').Wit;
-  log = require('node-wit').log;
-}
+const {Wit, log} = require('node-wit');
+
+const client = new Wit({
+  accessToken: process.env.WIT_TOKEN,
+  logger: new log.Logger(log.DEBUG) // optional
+});
 
 // Webserver parameter
 const PORT = process.env.PORT || 8445;
