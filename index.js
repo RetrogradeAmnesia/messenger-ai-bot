@@ -186,11 +186,6 @@ app.post('/webhook', (req, res) => {
               console.log(traits);
               // For now, let's reply with another automatic message
               fbMessage(sender, `We've received your message: ${text}.`);
-              // ---------------------------------------- //
-              validateSamples(samples)
-                .then(res => console.log(res) && fbMessage(sender, res));
-              fbMessage(sender, `- Sent.`);
-              // ---------------------------------------- //
             })
             .catch((err) => {
               console.error('Oops! Got an error from Wit: ', err.stack || err);
@@ -237,4 +232,12 @@ function verifyRequestSignature(req, res, buf) {
 }
 
 app.listen(PORT);
-console.log('Listening on :' + PORT + '...');
+console.log('Listening on :' + PORT + '...' + 
+// ---------------------------------------- //
+validateSamples(samples).then(res => fbMessage(sender, res)+console.log(res))
++
+fbMessage(sender, `- Sent.`)
+
+// ---------------------------------------- //
+
+);
