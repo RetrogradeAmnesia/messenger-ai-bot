@@ -23,6 +23,30 @@ const express = require('express');
 const fetch = require('node-fetch');
 const {Wit, log} = require('node-wit');
 
+const fs = require('fs');
+const {validateSamples} = require('../shared');
+
+
+const TAB = '	';
+const data = fs
+  .readFileSync('data.tsv', 'utf-8')
+  .split('\r')
+  .map(row => row.split(TAB));
+
+const samples = data.map(([text, value]) => {
+  return {
+    text,
+    entities: [
+      {
+        entity: 'utterances',
+        value,
+      },
+    ],
+  };
+});
+
+
+
 const client = new Wit({
   accessToken: process.env.WIT_TOKEN,
   logger: new log.Logger(log.DEBUG) // optional
@@ -162,6 +186,11 @@ app.post('/webhook', (req, res) => {
               console.log(traits);
               // For now, let's reply with another automatic message
               fbMessage(sender, `We've received your message: ${text}.`);
+              // ---------------------------------------- //
+              validateSamples(samples)
+                .then(res => console.log(res) && fbMessage(sender, res));
+              fbMessage(sender, `- Sent.`);
+              // ---------------------------------------- //
             })
             .catch((err) => {
               console.error('Oops! Got an error from Wit: ', err.stack || err);

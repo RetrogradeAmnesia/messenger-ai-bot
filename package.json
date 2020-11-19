@@ -11,6 +11,7 @@
     "crypto":"latest",
     "express": "latest",
     "node-fetch": "latest",
-    "node-wit": "latest"
+    "node-wit": "latest",
+    "fs": "latest"
   }
 }
